@@ -13,14 +13,15 @@ const userRouter = require('./routes/userRoutes').default;
 const app = express();
 
 //middlewares
-app.use(morgan('dev'));
-
+if (process.env.NODE_ENV === 'development') {
+  app.use(morgan('dev'));
+  app.use((req, res, next) => {
+    console.log('Hello from the middleware 👋 ');
+    next();
+  });
+}
 app.use(express.json());
-
-app.use((req, res, next) => {
-  console.log('Hello from the middleware 👋 ');
-  next();
-});
+app.use(express.static(`${__dirname}/public`));
 
 app.use((req, res, next) => {
   var n = new Date();
