@@ -27,35 +27,39 @@ const getAllTours = (req, res) => {
 };
 
 const createTour = (req, res) => {
-const newId = tours[.length - 1].id + 1;
-  const newTour = Object.assign({id: newId}, req.body);
+  const newId = tours.length + 1;
+  const newTour = Object.assign({ id: newId }, req.body);
   tours.push(newTour);
-  fs.writeFile(`${__dirname}/dev-data/data/tours-simple.json`, JSON.stringify(tours), () => {
-    res.status(201).json({
-      status: 'success',
-      data: {
-        tour: newTour
-      }
-    })
-  })
+  fs.writeFile(
+    `${__dirname}/dev-data/data/tours-simple.json`,
+    JSON.stringify(tours),
+    () => {
+      res.status(201).json({
+        status: 'success',
+        data: {
+          tour: newTour,
+        },
+      });
+    }
+  );
 };
 
 const updateTour = (req, res) => {
   const id = req.params.id * 1;
-  if(id > tours.length) {
-    return res.status(404).json({status: "Invalid ID"})
+  if (id > tours.length) {
+    return res.status(404).json({ status: 'Invalid ID' });
   }
-  const tour = tours.find(element => element.id === id)
+  const tour = tours.find((element) => element.id === id);
   // TODO: update tour key values here with req data
-  req.status(200).json({status: "success", data: {tour}})
+  req.status(200).json({ status: 'success', data: { tour } });
 };
 
 const getTour = (req, res) => {
   const id = req.params.id * 1;
-  if(id > tours.length) {
-    return res.status(404).json({status: "Invalid ID"})
+  if (id > tours.length) {
+    return res.status(404).json({ status: 'Invalid ID' });
   }
-  const tour = tours.find(element => element.id === id)
+  const tour = tours.find((element) => element.id === id);
 
   res.status(200).json({
     status: 'success',
@@ -65,16 +69,16 @@ const getTour = (req, res) => {
 
 const deleteTour = (req, res) => {
   const id = req.params.id * 1;
-  if(id > tours.length) {
-    return res.status(404).json({status: "Invalid ID"})
+  if (id > tours.length) {
+    return res.status(404).json({ status: 'Invalid ID' });
   }
-  const tour = tours.find(element => element.id === id)
+  const tour = tours.find((element) => element.id === id);
   // TODO delete tour by id
   res.status(200).json({
     status: 'success',
     data: { tours },
   });
-}
+};
 
 app.get('/api/v1/tours', getAllTours);
 
