@@ -4,7 +4,7 @@ import {
   getUser,
   updateUser,
   deleteUser,
-} from '../../controller/user';
+} from '../../controllers/userController';
 
 import { Router } from 'express';
 

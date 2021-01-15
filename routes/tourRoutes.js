@@ -4,7 +4,7 @@ import {
   getTour,
   updateTour,
   deleteTour,
-} from './../routeControllers/tourController';
+} from '../controllers/tourController';
 
 const router = express.Router();
 router.route('/').get(getAllTours).post(createTour);

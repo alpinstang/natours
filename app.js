@@ -1,6 +1,6 @@
 /**
  * @author John McDonald <jcm.codes@gmail.com>
- * @file Description
+ * @file contains middlewares for the app
  * @desc Created on 2021-01-15 12:38:21 am
  * @copyright GNU General Public License v3.0
  */
@@ -31,8 +31,4 @@ app.use((req, res, next) => {
 app.use('/api/v1/tours', tourRouter);
 app.use('/api/v1/users', userRouter);
 
-// Start Server
-const port = 3000;
-app.listen(port, () => {
-  console.log('🚀 app running on port ' + port + '...');
-});
+exports.module(app);
