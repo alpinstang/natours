@@ -4,12 +4,15 @@ import {
   getUser,
   updateUser,
   deleteUser,
-} from '../../controllers/userController';
+  checkID,
+  checkPostBody,
+} from '../controllers/userController';
 
-import { Router } from 'express';
+const router = express.Router();
 
-const router = Router();
-router.route('/').get(getAllUsers).post(createUser);
+router.param('id', checkID);
+
+router.route('/').get(getAllUsers).post(checkPostBody, createUser);
 router
   .route('/:id')
   .get(getUser)

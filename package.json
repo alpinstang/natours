@@ -4,7 +4,8 @@
   "description": "learning node express and mongodb",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
   },
   "repository": {
     "type": "git",
@@ -16,7 +17,7 @@
     "mongodb"
   ],
   "author": "John McDonald",
-  "license": "MIT",
+  "license": "GNU General Publice License v3.0",
   "bugs": {
     "url": "https://github.com/alpinstang/natours/issues"
   },

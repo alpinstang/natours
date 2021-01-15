@@ -4,6 +4,23 @@ const users = JSON.parse(
   fs.readFileSync(`${__dirname}/../dev-data/data/users.json`)
 );
 
+exports.checkID = (req, res, next, val) => {
+  if (req.params.id * 1 > users.length) {
+    return res
+      .status(404)
+      .json({ stats: 'fail', message: 'Invalid ID' });
+  }
+};
+
+exports.checkPostBody = (req, res, next, val) => {
+  if (!req.params.name || !req.params.price) {
+    return res
+      .status(400)
+      .json({ stats: 'Bad request', message: 'missing values' });
+  }
+  next();
+};
+
 exports.getAllUsers = (req, res) => {
   res.status(200).json({
     status: 'success',
