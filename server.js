@@ -1,15 +1,23 @@
-/**
- * @author John McDonald <jcm.codes@gmail.com>
- * @file server entry point
- * @desc Created on 2021-01-15 12:38:21 am
- * @copyright GNU General Public License v3.0
- */
-import { dotenv } from 'dotenv';
-import { app } from './app';
+const mongoose = require('mongoose');
+const dotenv = require('dotenv');
 
 dotenv.config({ path: './config.env' });
+const app = require('./app');
+
+const DB = process.env.DATABASE.replace(
+  '<PASSWORD>',
+  process.env.DATABASE_PASSWORD
+);
+
+mongoose
+  .connect(DB, {
+    useNewUrlParser: true,
+    useCreateIndex: true,
+    useFindAndModify: false
+  })
+  .then(() => console.log('DB connection successful!'));
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
-  console.log('🚀 app running on port ' + port + '...');
+  console.log(`App running on port ${port}...`);
 });
